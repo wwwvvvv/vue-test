@@ -4,17 +4,18 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    entry: __dirname + '/app/main.js',
+    entry: __dirname + '/app/main.js', // 入口文件
     output: {
-        filename: "bundle.js",
-        path: __dirname + '/public'
+        filename: "bundle.js", //打包后输出文件的文件名
+        path: __dirname + '/public' //打包后的文件存放的地方
     },
     mode: 'development', //
     devServer: {//启动服务配置
-        contentBase: './public',
+        contentBase: './public', // 本地服务器所加载文件的目录
         port: 3004,
         host: '192.168.0.137',
         inline: true, // 文件修改后刷新
+        hot: true, // 热更新
         historyApiFallback: true // 不跳转（如果找不到界面就返回默认首页）
     },
     devtool: "source-map", //会生成对于调试的完整的.map文件，但同时也会减慢打包速度
@@ -46,6 +47,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'app/index.template.html')
         }),
-        new CleanWebpackPlugin() //索要清理的文件夹名称
+        new CleanWebpackPlugin(), //索要清理的文件夹名称
+        new webpack.HotModuleReplacementPlugin() //热更新插件
     ]
 };
