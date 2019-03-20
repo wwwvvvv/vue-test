@@ -52,6 +52,10 @@ module.exports = {
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
+        test: /\.(sass|scss)$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'] // 需要用到的loader，一定是这个顺序， 因为调用loader的顺序是从右向左编译的
+      },
+      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
